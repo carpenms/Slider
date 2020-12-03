@@ -6,7 +6,7 @@
       if (annyang) {
         // Let's define our first command. First the text we expect, and then the function it should call
         const commands = {
-          'hello': () => { alert('Hello world!'); }
+          'Shuffle': shuffle
           }
         };
 
@@ -129,7 +129,64 @@ var makeMoveHandler = function (tile, i, j) {
   }
 };
       
-function voiceMove () {
+function moveTop () {
+  var rows = document.querySelectorAll('.row');
+  for (let i = 0; i < rows.length; ++i) {
+    var row = rows.item(i);
+    var tiles = row.querySelectorAll('.tile');
+    for (let j = 0; j < tiles.length; ++j) {
+      var tile = tiles.item(j);
+      var rowOffset = Math.abs(emptyRow - i);
+      var colOffset = Math.abs(emptyCol - j);
+      if (rowOffset == 1 && colOffset == 0 || rowOffset == 0 && colOffset == 1) {
+        tile.style.marginLeft = emptyCol * 200 + 'px';
+        tile.style.marginTop = emptyRow * 200 + 'px';
+        [i, emptyRow] = [emptyRow, i];
+        [j, emptyCol] = [emptyCol, j];
+      }
+    }
+  }
+};
+      
+      function moveRight () {
+  var rows = document.querySelectorAll('.row');
+  for (let i = 0; i < rows.length; ++i) {
+    var row = rows.item(i);
+    var tiles = row.querySelectorAll('.tile');
+    for (let j = 0; j < tiles.length; ++j) {
+      var tile = tiles.item(j);
+      var rowOffset = Math.abs(emptyRow - i);
+      var colOffset = Math.abs(emptyCol - j);
+      if (rowOffset == 1 && colOffset == 0 || rowOffset == 0 && colOffset == 1) {
+        tile.style.marginLeft = emptyCol * 200 + 'px';
+        tile.style.marginTop = emptyRow * 200 + 'px';
+        [i, emptyRow] = [emptyRow, i];
+        [j, emptyCol] = [emptyCol, j];
+      }
+    }
+  }
+};
+      
+      function moveLeft () {
+  var rows = document.querySelectorAll('.row');
+  for (let i = 0; i < rows.length; ++i) {
+    var row = rows.item(i);
+    var tiles = row.querySelectorAll('.tile');
+    for (let j = 0; j < tiles.length; ++j) {
+      var tile = tiles.item(j);
+      var rowOffset = Math.abs(emptyRow - i);
+      var colOffset = Math.abs(emptyCol - j);
+      if (rowOffset == 1 && colOffset == 0 || rowOffset == 0 && colOffset == 1) {
+        tile.style.marginLeft = emptyCol * 200 + 'px';
+        tile.style.marginTop = emptyRow * 200 + 'px';
+        [i, emptyRow] = [emptyRow, i];
+        [j, emptyCol] = [emptyCol, j];
+      }
+    }
+  }
+};
+      
+      function moveBot() {
   var rows = document.querySelectorAll('.row');
   for (let i = 0; i < rows.length; ++i) {
     var row = rows.item(i);
