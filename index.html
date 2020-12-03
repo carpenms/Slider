@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+      <script>
+      if (annyang) {
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+          'Move': voiceMove
+          };
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+      </script>
     <meta charset="utf-8">
     <title>Slide Puzzle Project</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -112,6 +128,25 @@ var makeMoveHandler = function (tile, i, j) {
     }
   }
 };
+      
+function voiceMove () {
+  var rows = document.querySelectorAll('.row');
+  for (let i = 0; i < rows.length; ++i) {
+    var row = rows.item(i);
+    var tiles = row.querySelectorAll('.tile');
+    for (let j = 0; j < tiles.length; ++j) {
+      var tile = tiles.item(j);
+      var rowOffset = Math.abs(emptyRow - i);
+      var colOffset = Math.abs(emptyCol - j);
+      if (rowOffset == 1 && colOffset == 0 || rowOffset == 0 && colOffset == 1) {
+        tile.style.marginLeft = emptyCol * 200 + 'px';
+        tile.style.marginTop = emptyRow * 200 + 'px';
+        [i, emptyRow] = [emptyRow, i];
+        [j, emptyCol] = [emptyCol, j];
+      }
+    }
+  }
+};
 
 var shuffle = function () {
   var rows = document.querySelectorAll('.row');
@@ -120,6 +155,7 @@ var shuffle = function () {
     var tiles = rows.item(row).querySelectorAll('.tile');
     var tile = ~~(Math.random() * tiles.length);
     tiles.item(tile).click();
+  
   }
 };
 
